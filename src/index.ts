@@ -4,7 +4,8 @@ import passport from 'passport';
 import authJWT from './api/libs/auth';
 
 // Routes
-import userRouter from './api/resources/user/user.router';
+import userRouter from './api/resources/users/user.router';
+import inspectionRouter from './api/resources/inspections/inspection.router';
 
 const app: Application = express();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 // Router
 app.use('/api/users', userRouter);
+app.use('/api/inspection', inspectionRouter);
 
 
 app.use( passport.initialize() );

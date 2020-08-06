@@ -1,5 +1,5 @@
 import passportJWT from 'passport-jwt';
-import { getUserById } from '../resources/user/user.controller';
+import { getUserById } from '../resources/users/user.controller';
 
 export default new passportJWT.Strategy({
     secretOrKey: 'secretTemp',
