@@ -1,6 +1,8 @@
 import express, { Router, Request, Response } from 'express';
 import { IInspection } from './inspection.model';
-import { getAllInspections, getInspectionById } from './inspection.controller';
+import { getAllInspections, getInspectionById, createInspection } from './inspection.controller';
+import passport from 'passport';
+const jwtAuthenticate = passport.authenticate('jwt', { session: false }) 
 
 const inspectionRouter: Router = express.Router();
 
@@ -22,6 +24,18 @@ inspectionRouter.get('/:id', async ( req: Request, res: Response ) => {
     }catch(err) {
         return res.status(500).send(`Error al encontrar la inspeccion, error: ${ err }`);
     } 
+});
+
+inspectionRouter.post('/', jwtAuthenticate, async ( req: Request, res: Response ) => {
+    const inspection: IInspection = req.body;
+    const { revisions } = inspection;
+
+    try {
+        const newInspection = await createInspection(inspection, revisions);
+        return res.json(newInspection);
+    }catch( err ) {
+        return res.status(500).send(`Error al crearla inspección: ${ err }`);
+    }
 });
 
 export default inspectionRouter;
