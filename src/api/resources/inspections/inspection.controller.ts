@@ -15,3 +15,15 @@ export function createInspection( inspection: IInspection, revisions: any) {
     }).save()
 }
 
+export function updateInspection( inspection: any, id: string ) {
+    return Inspection.findOneAndUpdate({ _id: id }, {
+        ...inspection
+    }, {
+        new: true
+    })
+}
+
+export function deleteInspection( id: string ) {
+    return Inspection.findByIdAndRemove( id )
+}
+

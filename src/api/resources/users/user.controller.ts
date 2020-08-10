@@ -1,7 +1,7 @@
 import User, { IUser } from './user.model';
 
 export function getAllUsers() {
-    return User.find({});
+    return User.find({}).limit(10);
 }
 
 export function createUser( user: IUser, hashedPassword: string ) {

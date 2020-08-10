@@ -1,4 +1,5 @@
 import express, { Application } from 'express';
+import logger from './utils/logger';
 import './database/connection';
 import passport from 'passport';
 import authJWT from './api/libs/auth';
@@ -20,6 +21,6 @@ app.use('/api/inspection', inspectionRouter);
 app.use( passport.initialize() );
 
 app.listen(3002, () => {
-    console.log('application running on port 3002');
+    logger.info('Server is running in port 3002!');
 })
 

@@ -9,7 +9,7 @@ const jwtAuthenticate = passport.authenticate('jwt', { session: false })
 
 const userRouter: Router = express.Router();
 
-userRouter.get('/', jwtAuthenticate, async ( req: Request, res: Response ) => {
+userRouter.get('/', async ( req: Request, res: Response ) => {
     try {
         const users: IUser[] | undefined =  await getAllUsers();
         return res.json(users);

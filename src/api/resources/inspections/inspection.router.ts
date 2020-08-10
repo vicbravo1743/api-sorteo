@@ -38,4 +38,17 @@ inspectionRouter.post('/', jwtAuthenticate, async ( req: Request, res: Response 
     }
 });
 
+inspectionRouter.put('/:id', async ( req: Request, res: Response ) => {
+    const id: string = req.params.id;
+    const updatedInspection: any = req.body;
+
+    try {
+        const newInspection: any = await updatedInspection( updatedInspection, id );
+        return res.json(newInspection);
+    }catch( err ) {
+        return res.status(500).send(`Error al actualizar la inspección. Error: ${err}`);
+    }
+
+})
+
 export default inspectionRouter;
